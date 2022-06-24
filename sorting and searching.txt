@@ -1,0 +1,72 @@
+//lire les elements de tableau
+PROCEDURE read_array(n:integer,VAR t: ARRAY_OF integer;)
+VAR
+    i:integer;
+BEGIN
+    FOR i FROM 0 TO n-1 STEP 1 DO
+        read(t[i]);
+    END_FOR
+END
+//trie par selection de tableau
+PROCEDURE selection_sort(VAR tab : ARRAY_OF INTEGER)
+VAR
+   i,j,min_idx,n : INTEGER;
+BEGIN
+   n := tab.length;
+   
+   FOR i FROM 0 TO n-2 STEP 1  DO
+       min_idx := i;
+       FOR j  FROM i  TO n-i-2 STEP 1  DO
+           IF (tab[j]<tab[min_idx]) THEN
+               min_idx := j;
+           END_IF
+       END_FOR
+   
+   swap(arr[min_idx],arr[i])
+   END_FOR
+END
+
+//permitation de deux valeurs
+PROCEDURE swap(VAR xp, VAR yp : INTEGER)
+VAR
+   tmp : INTEGER;
+BEGIN
+  tmp := xp;
+  xp := yp;
+  yp := tmp;
+END
+//procedure d'insertion d un element dans un tableau trie
+PROCEDURE inser (n:integer;Var t : ARRAY_OF integer;)
+VAR
+    
+     i:integer;
+BEGIN
+    i:=0
+    WHILE ( i<t.length-1) DO
+        IF (t[i]<n) THEN
+            i:=i+1;
+        END_IF
+    END_WHILE
+    IF (i=t.length-1) THEN
+        t[i+1]=n;
+    ELSE
+    j:=t.length-1;
+       WHILE (j>=i-1) DO
+        t[j+1]:=t[j];
+        j:=j+1;
+       END_WHILE
+       t[i-1]:=n;
+    END_IF
+END
+ALGORITHM insertion
+VAR
+    t : ARRAY_OF integer;
+    taille,nb:integer;
+BEGIN
+      write("donner la taille de tableau");
+      read(taille);
+      read_array(taille,t);
+      selection_sort(t);
+      inser(nb,t);
+
+END
